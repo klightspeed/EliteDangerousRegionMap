@@ -15,7 +15,7 @@ def findRegion(x, y, z):
     px = int((x - x0) / pixelsize)
     pz = int(2048 - (z - z0) / pixelsize)
     
-    if pz < 0 or pz > len(regionmap):
+    if px < 0 or pz < 0 or pz >= len(regionmap):
         return None
     else:
         row = regionmap[pz]
@@ -26,6 +26,8 @@ def findRegion(x, y, z):
                 break
             else:
                 rx += rl
+        else:
+            pv = 0
 
         if pv == 0:
             return None
