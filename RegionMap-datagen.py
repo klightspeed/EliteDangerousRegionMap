@@ -61,7 +61,7 @@ for l in regionmap:
         if px != p:
             rle.append((n, p))
             p = px
-            n = 0
+            n = 1
         else:
             n += 1
     rle.append((n, p))
