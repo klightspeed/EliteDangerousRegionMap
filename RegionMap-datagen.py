@@ -52,7 +52,7 @@ regions = [
 ]
 
 lines = []
-for l in regionmap:
+for l in regionmap[::-1]:
     rle = []
     p = 0
     n = 0
