@@ -6,14 +6,13 @@ import sys
 import json
 from RegionMapData import regions, regionmap
 
-pixelsize = 4096 / 83
 x0 = -49985
 y0 = -40985
 z0 = -24105
 
 def findRegion(x, y, z):
-    px = int((x - x0) / pixelsize)
-    pz = int((z - z0) / pixelsize)
+    px = int((x - x0) * 83 / 4096)
+    pz = int((z - z0) * 83 / 4096)
     
     if px < 0 or pz < 0 or pz >= len(regionmap):
         return None
