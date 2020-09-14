@@ -2,6 +2,7 @@
 
 from PIL import Image
 from numpy import asarray
+import json
 regionmap = asarray(Image.open('RegionMap.png'))
 region1 = 42 * 4
 
@@ -66,6 +67,7 @@ for l in regionmap[::-1]:
             n += 1
     rle.append((n, p))
     lines.append(rle)
+
 with open('RegionMapData.py', 'wt') as f:
     f.write('#!/bin/env python3\n')
     f.write('\n')
@@ -79,4 +81,34 @@ with open('RegionMapData.py', 'wt') as f:
         f.write('    {0},\n'.format(repr(l)))
     f.write(']\n')
     f.write('\n')
+
+with open('RegionMapData.json', 'wt') as f:
+    f.write('{\n')
+    f.write('    "regions": [\n')
+    f.write('        {0}\n'.format(',\n        '.join(json.dumps(r) for r in regions)))
+    f.write('    ],\n')
+    f.write('    "regionmap": [\n');
+    f.write('        {0}\n'.format(',\n        '.join(json.dumps([[int(rl), int(rv)] for rl, rv in l]) for l in lines)))
+    f.write('    ]\n')
+    f.write('}\n')
+
+with open('RegionMapData.cs', 'wt') as f:
+    f.write('namespace EliteDangerousRegionMap\n')
+    f.write('{\n')
+    f.write('    public static partial class RegionMap\n')
+    f.write('    {\n')
+    f.write('        private static string[] RegionNames = new[]\n')
+    f.write('        {\n')
+    for r in regions:
+        f.write('            {0},\n'.format(json.dumps(r)))
+    f.write('        };\n')
+    f.write('\n')
+    f.write('        private static (int, int)[][] RegionMapLines = new[]\n')
+    f.write('        {\n')
+    for row in lines:
+        f.write('            new[]{' + ','.join(repr((l, v)) for l, v in row) + '},\n')
+    f.write('        };\n')
+    f.write('    }\n')
+    f.write('}\n')
+
 
