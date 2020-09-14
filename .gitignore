@@ -139,3 +139,6 @@ Properties/
 
 # NPM files
 node_modules/
+
+# vscode
+.vscode/

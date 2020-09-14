@@ -76,5 +76,49 @@ async function findRegionsForSystems(sysname){
     });
 }
 
+async function main(args){
+    if (args.length == 0) {
+        console.log("Usage: " + process.argv[0] + " " + process.argv[1] + " \"System Name\" [..]");
+        return;
+    }
+
+    for (var sysname of args){
+        for (var sysdata of await findRegionsForSystems(sysname)){
+            let region = { id: 0, name: null };
+
+            if (sysdata.region !== undefined){
+                region = sysdata.region;
+                let x = sysdata.x;
+                let y = sysdata.y;
+                let z = sysdata.z;
+
+                if (region.id != 0){
+                    console.log("System %s at (%f,%f,%f) is in region %d (%s)", sysdata.name, x, y, z, region.id, region.name);
+                } else {
+                    console.log("System %s at (%f,%f,%f) is outside the region map", sysdata.name, x, y, z);
+                }
+            }
+
+            if (sysdata.boxel !== undefined && sysdata.boxel.region.id != region.id){
+                let boxel = sysdata.boxel;
+                let boxelregion = boxel.region;
+                let x = boxel.x;
+                let y = boxel.y;
+                let z = boxel.z;
+
+                if (boxelregion.id != 0){
+                    console.log("Boxel of system %s at (%f,%f,%f) is in region %d (%s)", sysdata.name, x, y, z, boxelregion.id, boxelregion.name);
+                } else {
+                    console.log("Boxel of system %s at (%f,%f,%f) is outside the region map", sysdata.name, x, y, z);
+                }
+            }
+        }
+    }
+}
+
 module.exports.findRegion = findRegion;
 module.exports.findRegionsForSystems = findRegionsForSystems;
+
+if (require.main == module){
+    main(process.argv.slice(2));
+}
