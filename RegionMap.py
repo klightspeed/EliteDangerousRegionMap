@@ -33,49 +33,78 @@ def findRegion(x, y, z):
         else:
             return (pv, regions[pv])
 
+def findRegionsForSystems(sysname):
+    url = 'https://www.edsm.net/api-v1/systems?systemName=' + urllib.parse.quote(sysname) + '&coords=1&showId=1'
+
+    with urllib.request.urlopen(url) as f:
+        systems = json.load(f)
+
+    for system in systems:
+        systemdata = {
+            'name': system['name'],
+            'id64': system['id64'] if 'id64' in system else None
+        }
+
+        if 'coords' in system:
+            coords = system['coords']
+            x = coords['x']
+            y = coords['y']
+            z = coords['z']
+            systemdata['x'] = x
+            systemdata['y'] = y
+            systemdata['z'] = z
+
+            systemdata['region'] = findRegion(x, y, z)
+
+        if 'id64' in system:
+            id64 = system['id64']
+            masscode = id64 & 7
+            z = (((id64 >> 3) & (0x3FFF >> masscode)) << masscode) * 10 + z0
+            y = (((id64 >> (17 - masscode)) & (0x1FFF >> masscode)) << masscode) * 10 + y0
+            x = (((id64 >> (30 - masscode * 2)) & (0x3FFF >> masscode)) << masscode) * 10 + x0
+
+            systemdata['boxel'] = {
+                'x': x,
+                'y': y,
+                'z': z,
+                'region': findRegion(x, y, z)
+            }
+
+        yield systemdata
+
 def main():
     if len(sys.argv) <= 1:
         print('Usage: {0} "System Name" [...]'.format(sys.argv[0]))
         return
 
     for sysname in sys.argv[1:]:
-        url = 'https://www.edsm.net/api-v1/systems?systemName=' + urllib.parse.quote(sysname) + '&coords=1&showId=1'
-        with urllib.request.urlopen(url) as f:
-            systems = json.load(f)
-        for system in systems:
-            region = findRegion(system['coords']['x'], system['coords']['y'], system['coords']['z'])
-            if region is not None:
-                print('System {0} at ({1},{2},{3}) is in region {4} ({5})'.format(
-                    system['name'],
-                    system['coords']['x'],
-                    system['coords']['y'],
-                    system['coords']['z'],
-                    region[0],
-                    region[1]
-                ))
-            else:
-                print('System {0} at ({1},{2},{3}) is outside the region map'.format(
-                    system['name'],
-                    system['coords']['x'],
-                    system['coords']['y'],
-                    system['coords']['z']
-                ))
+        for sysdata in findRegionsForSystems(sysname):
+            region = None
 
-            id64 = system['id64']
-            masscode = id64 & 7
-            z = (((id64 >> 3) & (0x3FFF >> masscode)) << masscode) * 10 + z0
-            y = (((id64 >> (17 - masscode)) & (0x1FFF >> masscode)) << masscode) * 10 + y0
-            x = (((id64 >> (30 - masscode * 2)) & (0x3FFF >> masscode)) << masscode) * 10 + x0
-            region2 = findRegion(x, y, z)
-            if region2 != region:
-                print('Boxel of system {0} is at ({1},{2},{3})'.format(
-                    system['name'],
-                    x,
-                    y,
-                    z
-                ))
+            if 'region' in sysdata:
+                region = sysdata['region']
+                if region is not None:
+                    print('System {0} at ({1},{2},{3}) is in region {4} ({5})'.format(
+                        sysdata['name'],
+                        sysdata['x'],
+                        sysdata['y'],
+                        sysdata['z'],
+                        region[0],
+                        region[1]
+                    ))
+                else:
+                    print('System {0} at ({1},{2},{3}) is outside the region map'.format(
+                        sysdata['name'],
+                        sysdata['x'],
+                        sysdata['y'],
+                        sysdata['z']
+                    ))
+
+            if 'boxel' in sysdata and sysdata['boxel']['region'] != region:
+                region2 = sysdata['boxel']['region']
+
                 if region2 is not None:
-                    print('({0},{1},{2}) is in region {3} ({4})'.format(
+                    print('Boxel of system {0} at ({1},{2},{3}) is in region {4} ({5})'.format(
                         x,
                         y,
                         z,
@@ -83,7 +112,7 @@ def main():
                         region2[1]
                     ))
                 else:
-                    print('({0},{1},{2}) is outside the region map'.format(
+                    print('Boxel of system {0} at ({1},{2},{3}) is outside the region map'.format(
                         x,
                         y,
                         z

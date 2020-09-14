@@ -4,6 +4,31 @@ using System.Text.Json;
 
 namespace EliteDangerousRegionMap
 {
+    public class SystemData
+    {
+        public string Name { get; set; }
+        public long ID64 { get; set; }
+        public double? X { get; set; }
+        public double? Y { get; set; }
+        public double? Z { get; set; }
+        public Region Region { get; set; }
+        public SystemBoxel Boxel { get; set; }
+    }
+
+    public class Region
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
+
+    public class SystemBoxel
+    {
+        public double X { get; set; }
+        public double Y { get; set; }
+        public double Z { get; set; }
+        public Region Region { get; set; }
+    }
+
     public static partial class RegionMap
     {
         private class EDSMSystem
@@ -24,7 +49,7 @@ namespace EliteDangerousRegionMap
         private const double y0 = -40985;
         private const double z0 = -24105;
 
-        public static (int, string) FindRegion(double x, double y, double z)
+        public static Region FindRegion(double x, double y, double z)
         {
             var px = (int)((x - x0) * 83 / 4096);
             var pz = (int)((z - z0) * 83 / 4096);
@@ -54,72 +79,109 @@ namespace EliteDangerousRegionMap
 
                 if (pv == 0)
                 {
-                    return default;
+                    return null;
                 }
                 else
                 {
-                    return (pv, RegionNames[pv]);
+                    return new Region { Id = pv, Name = RegionNames[pv] };
                 }
             }
+        }
+
+        public static SystemData[] FindRegionsForSystems(string sysname)
+        {
+            var url = $"https://www.edsm.net/api-v1/systems?systemName={Uri.EscapeDataString(sysname)}&coords=1&showId=1";
+            var client = new WebClient();
+            var jsonstr = client.DownloadString(url);
+            var systems = JsonSerializer.Deserialize<EDSMSystem[]>(jsonstr);
+            var sysregions = new SystemData[systems.Length];
+
+            for (int i = 0; i < systems.Length; i++)
+            {
+                var system = systems[i];
+
+                var sysdata = sysregions[i] = new SystemData
+                {
+                    Name = system.name,
+                    ID64 = system.id64
+                };
+
+                if (system.coords != null)
+                {
+                    double x = system.coords.x;
+                    double y = system.coords.y;
+                    double z = system.coords.z;
+                    sysdata.X = x;
+                    sysdata.Y = y;
+                    sysdata.Z = z;
+
+                    sysdata.Region = FindRegion(x, y, z);
+                }
+
+                if (system.id64 != 0)
+                {
+                    int masscode = (int)(system.id64 & 7);
+                    double x = (((system.id64 >> (30 - masscode * 2)) & (0x3FFF >> masscode)) << masscode) * 10 + x0;
+                    double y = (((system.id64 >> (17 - masscode)) & (0x1FFF >> masscode)) << masscode) * 10 + y0;
+                    double z = (((system.id64 >> 3) & (0x3FFF >> masscode)) << masscode) * 10 + z0;
+
+                    sysdata.Boxel = new SystemBoxel
+                    {
+                        X = x,
+                        Y = y,
+                        Z = z,
+                        Region = FindRegion(x, y, z)
+                    };
+                }
+            }
+
+            return sysregions;
         }
 
         private static void Main(string[] args)
         {
             if (args.Length == 0)
             {
-	    	var exe = System.Reflection.Assembly.GetExecutingAssembly().Location;
+                var exe = System.Reflection.Assembly.GetExecutingAssembly().Location;
                 Console.WriteLine($"Usage: {exe} \"System 1\" [...]");
                 return;
             }
 
             foreach (var name in args)
             {
-                var url = $"https://www.edsm.net/api-v1/systems?systemName={Uri.EscapeDataString(name)}&coords=1&showId=1";
-                var client = new WebClient();
-                var jsonstr = client.DownloadString(url);
-                var systems = JsonSerializer.Deserialize<EDSMSystem[]>(jsonstr);
-
-                foreach (var system in systems)
+                foreach (var sysdata in FindRegionsForSystems(name))
                 {
-                    int regionid = 0;
-                    string regionname = null;
-
-                    if (system.coords != null)
+                    if (sysdata.X != null)
                     {
-                        double x = system.coords.x;
-                        double y = system.coords.y;
-                        double z = system.coords.z;
+                        var x = sysdata.X;
+                        var y = sysdata.Y;
+                        var z = sysdata.Z;
 
-                        (regionid, regionname) = FindRegion(x, y, z);
-                        if (regionid != 0)
+                        if (sysdata.Region != null)
                         {
-                            Console.WriteLine($"System {system.name} at ({x},{y},{z}) is in region {regionid} ({regionname})");
+                            Console.WriteLine($"System {sysdata.Name} at ({x},{y},{z}) is in region {sysdata.Region.Id} ({sysdata.Region.Name})");
                         }
                         else
                         {
-                            Console.WriteLine($"System {system.name} at ({x},{y},{z}) is outside the region map");
+                            Console.WriteLine($"System {sysdata.Name} at ({x},{y},{z}) is outside the region map");
                         }
                     }
 
-                    if (system.id64 != 0)
+                    if (sysdata.Boxel != null && sysdata.Boxel.Region.Id != sysdata.Region?.Id)
                     {
-                        int masscode = (int)(system.id64 & 7);
-                        double x = (((system.id64 >> (30 - masscode * 2)) & (0x3FFF >> masscode)) << masscode) * 10 + x0;
-                        double y = (((system.id64 >> (17 - masscode)) & (0x1FFF >> masscode)) << masscode) * 10 + y0;
-                        double z = (((system.id64 >> 3) & (0x3FFF >> masscode)) << masscode) * 10 + z0;
 
-                        var (regionid2, regionname2) = FindRegion(x, y, z);
+                        var boxel = sysdata.Boxel;
+                        var x = boxel.X;
+                        var y = boxel.Y;
+                        var z = boxel.Z;
 
-                        if (regionid2 != regionid)
+                        if (boxel.Region != null)
                         {
-                            if (regionid2 != 0)
-                            {
-                                Console.WriteLine($"Boxel of system {system.name} at ({x},{y},{z}) is in region {regionid2} ({regionname2})");
-                            }
-                            else
-                            {
-                                Console.WriteLine($"Boxel of system {system.name} at ({x},{y},{z}) is outside the region map");
-                            }
+                            Console.WriteLine($"Boxel of system {sysdata.Name} at ({x},{y},{z}) is in region {boxel.Region.Id} ({boxel.Region.Name})");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Boxel of system {sysdata.Name} at ({x},{y},{z}) is outside the region map");
                         }
                     }
                 }
