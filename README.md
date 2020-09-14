@@ -1,8 +1,31 @@
-# RegionMap.py
+The primary function of these scripts and classes is to take a set of coordinates and determine which Elite Dangerous codex region they are in.
 
-The primary function of the main script `RegionMap.py` is to take a set of coordinates and determine which Elite Dangerous codex region they are in.
+Each implementation has a `main()` entrypoint which takes one or more system names as command-line arguments, which are looked up using EDSM, and their region and the region of their boxel (if different) are output.
 
-This is wrapped by a `main()` which takes a system name as a command-line argument, which is looked up using EDSM, and its region and the region of its boxel (if different) are output.
+Each implements a `findRegion(x, y, z)` function / method, and a `findRegionsForSystems(sysname)` function / method.
+
+## Functions
+
+`findRegion(x, y, z)`
+
+This takes a set of coordinates and determine which Elite Dangerous codex region they are in.
+
+`findRegionsForSystems(sysname)`
+
+This takes a system name, looks it up on EDSM, and returns details on which region each of the returned systems is in.
+
+## Implementations
+### Python
+
+The functions are implemented in `RegionMap.py`
+
+### C#
+
+The methods are implemented in the `EliteDangerousRegionMap.RegionMap` static class in `RegionMap.cs`
+
+### Javascript
+
+The functions are exported by the `RegionMap.js` CommonJS module
 
 # Background
 
