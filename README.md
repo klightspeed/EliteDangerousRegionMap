@@ -29,7 +29,7 @@ The functions are exported by the `RegionMap.js` CommonJS module
 
 # Background
 
-There are 42 regions in a 91 segment by 30 ring polar grid.
+There are 42 regions in a 93 segment by 30 ring polar grid.
 
 By probing the edges of the regions (using the region name displayed when jumping between systems), it has been determined that the actual region map is on a 49.3494ly grid (essentially 4096 / 83 ly).
 
