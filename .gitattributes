@@ -1,0 +1,9 @@
+* text=auto
+*.py text
+*.cs text
+*.js text
+*.json text
+*.svg text
+*.sln text
+*.csproj text
+*.png binary

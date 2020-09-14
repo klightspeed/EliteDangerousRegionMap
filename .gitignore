@@ -127,3 +127,12 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# vim swap files
+.*.sw?
+
+#Visual Studio files
+.vs/
+[Oo]bj/
+[Bb]in/
+Properties/
