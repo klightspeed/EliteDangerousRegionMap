@@ -1,0 +1,22 @@
+{
+  "name": "ed-regionmap",
+  "version": "1.0.0",
+  "description": "The primary function of the main script `RegionMap.py` is to take a set of coordinates and determine which Elite Dangerous codex region they are in.",
+  "main": "RegionMap.js",
+  "dependencies": {
+    "cross-fetch": "^3.0.6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/klightspeed/EliteDangerousRegionMap.git"
+  },
+  "author": {
+    "name": "Ben Peddell",
+    "email": "klightspeed@killerwolves.net"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/klightspeed/EliteDangerousRegionMap/issues"
+  },
+  "homepage": "https://github.com/klightspeed/EliteDangerousRegionMap#readme"
+}

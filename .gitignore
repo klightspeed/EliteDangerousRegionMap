@@ -131,8 +131,11 @@ dmypy.json
 # vim swap files
 .*.sw?
 
-#Visual Studio files
+# Visual Studio files
 .vs/
 [Oo]bj/
 [Bb]in/
 Properties/
+
+# NPM files
+node_modules/
