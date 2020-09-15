@@ -88,6 +88,22 @@ namespace EliteDangerousRegionMap
             }
         }
 
+        public static SystemBoxel FindRegionForBoxel(long id64)
+        {
+            int masscode = (int)(id64 & 7);
+            double x = (((id64 >> (30 - masscode * 2)) & (0x3FFF >> masscode)) << masscode) * 10 + x0;
+            double y = (((id64 >> (17 - masscode)) & (0x1FFF >> masscode)) << masscode) * 10 + y0;
+            double z = (((id64 >> 3) & (0x3FFF >> masscode)) << masscode) * 10 + z0;
+
+            return new SystemBoxel
+            {
+                X = x,
+                Y = y,
+                Z = z,
+                Region = FindRegion(x, y, z)
+            };
+        }
+
         public static SystemData[] FindRegionsForSystems(string sysname)
         {
             var url = $"https://www.edsm.net/api-v1/systems?systemName={Uri.EscapeDataString(sysname)}&coords=1&showId=1";
@@ -120,18 +136,7 @@ namespace EliteDangerousRegionMap
 
                 if (system.id64 != 0)
                 {
-                    int masscode = (int)(system.id64 & 7);
-                    double x = (((system.id64 >> (30 - masscode * 2)) & (0x3FFF >> masscode)) << masscode) * 10 + x0;
-                    double y = (((system.id64 >> (17 - masscode)) & (0x1FFF >> masscode)) << masscode) * 10 + y0;
-                    double z = (((system.id64 >> 3) & (0x3FFF >> masscode)) << masscode) * 10 + z0;
-
-                    sysdata.Boxel = new SystemBoxel
-                    {
-                        X = x,
-                        Y = y,
-                        Z = z,
-                        Region = FindRegion(x, y, z)
-                    };
+                    sysdata.Boxel = FindRegionForBoxel((long)system.id64);
                 }
             }
 

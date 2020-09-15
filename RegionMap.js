@@ -38,6 +38,20 @@ function findRegion(x, y, z){
     }
 }
 
+function findRegionForBoxel(id64){
+    let masscode = id64 & 7;
+    let x = (((id64 >> (30 - masscode * 2)) & (16383 >> masscode)) << masscode) * 10 + x0;
+    let y = (((id64 >> (17 - masscode)) & (8191 >> masscode)) << masscode) * 10 + y0;
+    let z = (((id64 >> 3) & (16383 >> masscode)) << masscode) * 10 + z0;
+
+    return {
+        x: x,
+        y: y,
+        z: z,
+        region: findRegion(x, y, z)
+    }
+}
+
 async function findRegionsForSystems(sysname){
     const response = await crossfetch.fetch('https://www.edsm.net/api-v1/systems?systemName=' + encodeURIComponent(sysname) + '&coords=1&showId=1');
     const systems = await response.json();
@@ -48,28 +62,15 @@ async function findRegionsForSystems(sysname){
         };
 
         if (system.coords) {
-            let x = system.coords.x;
-            let y = system.coords.y;
-            let z = system.coords.z;
-            systemdata.x = x;
-            systemdata.y = y;
-            systemdata.z = z;
+            let x = systemdata.x = system.coords.x;
+            let y = systemdata.y = system.coords.y;
+            let z = systemdata.z = system.coords.z;
 
             systemdata.region = findRegion(x, y, z);
         }
 
         if (system.id64) {
-            let masscode = system.id64 & 7;
-            let x = (((system.id64 >> (30 - masscode * 2)) & (16383 >> masscode)) << masscode) * 10 + x0;
-            let y = (((system.id64 >> (17 - masscode)) & (8191 >> masscode)) << masscode) * 10 + y0;
-            let z = (((system.id64 >> 3) & (16383 >> masscode)) << masscode) * 10 + z0;
-
-            systemdata.boxel = {
-                x: x,
-                y: y,
-                z: z,
-                region: findRegion(x, y, z)
-            };
+            system.boxel = findRegionForBoxel(system.id64);
         }
 
         return systemdata;
@@ -117,6 +118,7 @@ async function main(args){
 }
 
 module.exports.findRegion = findRegion;
+module.exports.findRegionForBoxel = findRegionForBoxel;
 module.exports.findRegionsForSystems = findRegionsForSystems;
 
 if (require.main == module){

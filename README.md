@@ -2,13 +2,19 @@ The primary function of these scripts and classes is to take a set of coordinate
 
 Each implementation has a `main()` entrypoint which takes one or more system names as command-line arguments, which are looked up using EDSM, and their region and the region of their boxel (if different) are output.
 
-Each implements a `findRegion(x, y, z)` function / method, and a `findRegionsForSystems(sysname)` function / method.
+Each implements a `findRegion(x, y, z)` function / method, a `findRegionForBoxel(id64)` function / method, and a `findRegionsForSystems(sysname)` function / method.
+
+Please feel free to use and modify any of these implementations as needed for your use case.
 
 ## Functions
 
 `findRegion(x, y, z)`
 
-This takes a set of coordinates and determine which Elite Dangerous codex region they are in.
+This takes a set of coordinates and determines which Elite Dangerous codex region they are in.
+
+`findRegionForBoxel(id64)`
+
+This takes an id64 (system address) and determines which Elite Dangerous codex region its boxel is in.
 
 `findRegionsForSystems(sysname)`
 
@@ -47,4 +53,4 @@ The regions were mapped by following the edges of the regions on the galaxy map 
 
 `RegionMap.png` is a grayscale map of the regions, with #000000 being outside the map, #A8A8A8 being region 1 (Galactic Centre), going down in steps of #040404, down to region 42 (The Void) which is #040404.
 
-`RegionMapData.py` was generated from `RegionMap.png` using `RegionMap-datagen.py` - it contains (length,region) tuples of the run-length encoded data, with the rows going from bottom (minimum Z) to top.
+`RegionMapData.py`, `RegionMapData.json` and `RegionMapData.cs` were generated from `RegionMap.png` using `RegionMap-datagen.py` - they contains (length,region) tuples of the run-length encoded data, with the rows going from bottom (minimum Z) to top.

@@ -33,6 +33,19 @@ def findRegion(x, y, z):
         else:
             return (pv, regions[pv])
 
+def findRegionForBoxel(id64):
+    masscode = id64 & 7
+    z = (((id64 >> 3) & (0x3FFF >> masscode)) << masscode) * 10 + z0
+    y = (((id64 >> (17 - masscode)) & (0x1FFF >> masscode)) << masscode) * 10 + y0
+    x = (((id64 >> (30 - masscode * 2)) & (0x3FFF >> masscode)) << masscode) * 10 + x0
+
+    return {
+        'x': x,
+        'y': y,
+        'z': z,
+        'region': findRegion(x, y, z)
+    }
+
 def findRegionsForSystems(sysname):
     url = 'https://www.edsm.net/api-v1/systems?systemName=' + urllib.parse.quote(sysname) + '&coords=1&showId=1'
 
@@ -47,28 +60,14 @@ def findRegionsForSystems(sysname):
 
         if 'coords' in system:
             coords = system['coords']
-            x = coords['x']
-            y = coords['y']
-            z = coords['z']
-            systemdata['x'] = x
-            systemdata['y'] = y
-            systemdata['z'] = z
+            systemdata['x'] = x = coords['x']
+            systemdata['y'] = y = coords['y']
+            systemdata['z'] = z = coords['z']
 
             systemdata['region'] = findRegion(x, y, z)
 
-        if 'id64' in system:
-            id64 = system['id64']
-            masscode = id64 & 7
-            z = (((id64 >> 3) & (0x3FFF >> masscode)) << masscode) * 10 + z0
-            y = (((id64 >> (17 - masscode)) & (0x1FFF >> masscode)) << masscode) * 10 + y0
-            x = (((id64 >> (30 - masscode * 2)) & (0x3FFF >> masscode)) << masscode) * 10 + x0
-
-            systemdata['boxel'] = {
-                'x': x,
-                'y': y,
-                'z': z,
-                'region': findRegion(x, y, z)
-            }
+        if 'id64' in system and system['id64']:
+            systemdata['boxel'] = findRegionForBoxel(system['id64'])
 
         yield systemdata
 
