@@ -45,7 +45,7 @@ The region name in the galaxy map is the name of the region at the 0/0/0 corner 
 
 The region name written to the journal and shown on the main page of the codex is the region at the 0/0/0 corner of the system's boxel.
 
-Any codex discoveries are recorded by the game in the region the system's coordinates are in, but won't be shown unless or until the boxel coordinates are in the same region.
+Any codex discoveries are recorded by the game in the region the system's coordinates are in, but won't be shown unless or until the boxel coordinates are in the same region.  This discrepancy has been reported to Frontier - see https://issues.frontierstore.net/issue-detail/13286
 
 The regions were mapped by following the edges of the regions on the galaxy map (taking into account that the galaxy map is accurate to 10ly).
 
