@@ -40,9 +40,14 @@ function findRegion(x, y, z){
 
 function findRegionForBoxel(id64){
     let masscode = id64 & 7;
-    let x = (((id64 >> (30 - masscode * 2)) & (16383 >> masscode)) << masscode) * 10 + x0;
-    let y = (((id64 >> (17 - masscode)) & (8191 >> masscode)) << masscode) * 10 + y0;
-    let z = (((id64 >> 3) & (16383 >> masscode)) << masscode) * 10 + z0;
+
+    let xdiv = 1 << (30 - masscode * 2);
+    let ydiv = 1 << (17 - masscode)
+    let zdiv = 1 << 3
+
+    let x = ((Math.floor(id64 / xdiv) & (0x3FFF >> masscode)) << masscode) * 10 + x0;
+    let y = ((Math.floor(id64 / ydiv) & (0x1FFF >> masscode)) << masscode) * 10 + y0;
+    let z = ((Math.floor(id64 / zdiv) & (0x3FFF >> masscode)) << masscode) * 10 + z0;
 
     return {
         x: x,
