@@ -104,17 +104,19 @@ def main():
 
                 if region2 is not None:
                     print('Boxel of system {0} at ({1},{2},{3}) is in region {4} ({5})'.format(
-                        x,
-                        y,
-                        z,
+                        sysdata['name'],
+                        sysdata['boxel']['x'],
+                        sysdata['boxel']['y'],
+                        sysdata['boxel']['z'],
                         region2[0],
                         region2[1]
                     ))
                 else:
                     print('Boxel of system {0} at ({1},{2},{3}) is outside the region map'.format(
-                        x,
-                        y,
-                        z
+                        sysdata['name'],
+                        sysdata['boxel']['x'],
+                        sysdata['boxel']['y'],
+                        sysdata['boxel']['z'],
                     ))
 
 if __name__ == '__main__':
