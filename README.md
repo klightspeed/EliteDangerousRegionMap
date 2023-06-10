@@ -33,6 +33,16 @@ The methods are implemented in the `EliteDangerousRegionMap.RegionMap` static cl
 
 The functions are exported by the `RegionMap.js` CommonJS module
 
+### Rust
+
+The functions are implemented in the `region_map.rs`
+
+It needs 2 crates:
+  - `reqwest` (with the feature `blocking`)
+  - `serde_json`
+
+:warning: These crates are only needed for the CLI program. If you only need base functions given coordinates or id64, you can ignore this.
+
 # Background
 
 There are 42 regions in a 93 segment by 30 ring polar grid.

@@ -68,6 +68,21 @@ for l in regionmap[::-1]:
     rle.append((n, p))
     lines.append(rle)
 
+with open('region_map_data.rs', 'wt') as f:
+    f.write("pub const REGIONS: &[&str] = &[")
+    f.write('\n')
+    f.write('    "",\n')
+    f.write(',\n'.join('    "{0}"'.format(r) for r in regions[1:]))
+    f.write('\n')
+    f.write('];\n')
+    f.write('\n')
+    f.write("pub const REGION_MAP: &[&[(i32, i32)]] = &[")
+    f.write('\n')
+    f.write(',\n'.join('    &[' + ','.join(repr((u, v)) for u, v in row) + ']' for row in lines))
+    f.write('\n')
+    f.write('];\n')
+    f.write('\n')
+
 with open('RegionMapData.py', 'wt') as f:
     f.write('#!/bin/env python3\n')
     f.write('\n')
@@ -110,5 +125,4 @@ with open('RegionMapData.cs', 'wt') as f:
     f.write('        };\n')
     f.write('    }\n')
     f.write('}\n')
-
 
