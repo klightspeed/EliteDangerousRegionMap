@@ -65,4 +65,4 @@ The regions were mapped by following the edges of the regions on the galaxy map 
 
 `RegionMap.png` is a grayscale map of the regions, with #000000 being outside the map, #A8A8A8 being region 1 (Galactic Centre), going down in steps of #040404, down to region 42 (The Void) which is #040404.
 
-`RegionMapData.py`, `RegionMapData.json` and `RegionMapData.cs` were generated from `RegionMap.png` using `RegionMap-datagen.py` - they contains (length,region) tuples of the run-length encoded data, with the rows going from bottom (minimum Z) to top.
+`RegionMapData.py`, `RegionMapData.json`, `RegionMapData.cs`, and `region_map_data.rs` were generated from `RegionMap.png` using `RegionMap-datagen.py` - they contains (length,region) tuples of the run-length encoded data, with the rows going from bottom (minimum Z) to top.
