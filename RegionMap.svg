@@ -29,6 +29,14 @@
       stroke: #004040;
       stroke-width: 0.5px;
     }
+
+    .regionText {
+      font: 30px sans-serif;
+      fill: white;
+      text-anchor: middle;
+      dominant-baseline: middle;
+      pointer-events: none;
+    }
   </style>
   <line x1="1021" y1="1014" x2="1021" y2="2048" class="radialgrid" transform="rotate(0 1021 1014)" />
   <line x1="1021" y1="1014" x2="1021" y2="2048" class="radialgrid" transform="rotate(3.87096774193548387096 1021 1014)" />
@@ -41133,46 +41141,46 @@
              114.00,568.00 112.00,568.00 112.00,568.00
              112.00,568.00 112.00,567.00 112.00,567.00
              112.00,567.00 111.00,567.00 111.00,567.00 Z" />
-  <text style="font: 30px sans-serif; fill: white; text-anchor:middle; dominant-baseline: middle; transform: translate(1430px, 355px) rotate(30deg)">Acheron</text>
-  <text style="font: 30px sans-serif; fill: white; text-anchor:middle; dominant-baseline: middle; transform: translate(1455px, 1580px) rotate(-35deg)">Achilles's Altar</text>
-  <text style="font: 30px sans-serif; fill: white; text-anchor:middle; dominant-baseline: middle; transform: translate(169px, 1152px) rotate(80deg)">Aquila's Halo</text>
-  <text style="font: 30px sans-serif; fill: white; text-anchor:middle; dominant-baseline: middle; transform: translate(1254px, 903px) rotate(65deg)">Arcadian Stream</text>
-  <text style="font: 30px sans-serif; fill: white; text-anchor:middle; dominant-baseline: middle; transform: translate(1609px, 1104px) rotate(-80deg)">Dryman's Point</text>
-  <text style="font: 30px sans-serif; fill: white; text-anchor:middle; dominant-baseline: middle; transform: translate(800px, 1590px) rotate(20deg)">Elysian Shore</text>
-  <text style="font: 30px sans-serif; fill: white; text-anchor:middle; dominant-baseline: middle; transform: translate(1097px, 1048px) rotate(-60deg)">Empyrean Straits</text>
-  <text style="font: 30px sans-serif; fill: white; text-anchor:middle; dominant-baseline: middle; transform: translate(390px, 1523px) rotate(50deg)">Errant Marches</text>
-  <text style="font: 30px sans-serif; fill: white; text-anchor:middle; dominant-baseline: middle; transform: translate(1034px, 475px)">Formorian Frontier</text>
-  <text style="font: 30px sans-serif; fill: white; text-anchor:middle; dominant-baseline: middle; transform: translate(1015px, 1010px) rotate(-60deg)"><tspan x="0" dy="-0.5em">Galactic</tspan><tspan x="0" dy="1em">Centre</tspan></text>
-  <text style="font: 30px sans-serif; fill: white; text-anchor:middle; dominant-baseline: middle; transform: translate(1367px, 1361px) rotate(-45deg)">Hawking's Gap</text>
-  <text style="font: 30px sans-serif; fill: white; text-anchor:middle; dominant-baseline: middle; transform: translate(702px, 434px) rotate(-30deg)">Hieronymus Delta</text>
-  <text style="font: 30px sans-serif; fill: white; text-anchor:middle; dominant-baseline: middle; transform: translate(957px, 1480px) rotate(5deg)">Inner Orion Spur</text>
-  <text style="font: 30px sans-serif; fill: white; text-anchor:middle; dominant-baseline: middle; transform: translate(765px, 995px) rotate(-60deg)"><tspan x="0" dy="-1.5em">Inner</tspan><tspan x="0" dy="1em">Orion-Perseus</tspan><tspan x="0" dy="1em">Conflux</tspan></text>
-  <text style="font: 30px sans-serif; fill: white; text-anchor:middle; dominant-baseline: middle; transform: translate(852px, 1280px) rotate(40deg)"><tspan x="-2em" dy="-1.5em">Inner</tspan><tspan x="0" dy="1em">Scutum-Centaurus</tspan><tspan x="2em" dy="1em">Arm</tspan></text>
-  <text style="font: 30px sans-serif; fill: white; text-anchor:middle; dominant-baseline: middle; transform: translate(912px, 813px) rotate(-30deg)">Izanami</text>
-  <text style="font: 30px sans-serif; fill: white; text-anchor:middle; dominant-baseline: middle; transform: translate(1227px, 1866px) rotate(-15deg)">Kepler's Crest</text>
-  <text style="font: 30px sans-serif; fill: white; text-anchor:middle; dominant-baseline: middle; transform: translate(1656px, 1396px) rotate(-60deg)">Lyra's Song</text>
-  <text style="font: 30px sans-serif; fill: white; text-anchor:middle; dominant-baseline: middle; transform: translate(1646px, 565px) rotate(55deg)">Mare Somnia</text>
-  <text style="font: 30px sans-serif; fill: white; text-anchor:middle; dominant-baseline: middle; transform: translate(908px, 663px) rotate(-15deg)">Newton's Vault</text>
-  <text style="font: 30px sans-serif; fill: white; text-anchor:middle; dominant-baseline: middle; transform: translate(1020px, 1231px)">Norma Arm</text>
-  <text style="font: 30px sans-serif; fill: white; text-anchor:middle; dominant-baseline: middle; transform: translate(1296px, 1217px) rotate(-45deg)">Norma Expanse</text>
-  <text style="font: 30px sans-serif; fill: white; text-anchor:middle; dominant-baseline: middle; transform: translate(883px, 1055px) rotate(-80deg)">Odin's Hold</text>
-  <text style="font: 30px sans-serif; fill: white; text-anchor:middle; dominant-baseline: middle; transform: translate(669px, 1157px) rotate(70deg)">Orion-Cygnus Arm</text>
-  <text style="font: 30px sans-serif; fill: white; text-anchor:middle; dominant-baseline: middle; transform: translate(404px, 963px) rotate(-80deg)">Outer Arm</text>
-  <text style="font: 30px sans-serif; fill: white; text-anchor:middle; dominant-baseline: middle; transform: translate(1265px, 1530px) rotate(-25deg)">Outer Orion Spur</text>
-  <text style="font: 30px sans-serif; fill: white; text-anchor:middle; dominant-baseline: middle; transform: translate(707px, 869px) rotate(-60deg)"><tspan x="-2em" dy="-1.5em">Outer</tspan><tspan x="0" dy="1em">Orion-Perseus</tspan><tspan x="2em" dy="1em">Conflux</tspan></text>
-  <text style="font: 30px sans-serif; fill: white; text-anchor:middle; dominant-baseline: middle; transform: translate(389px, 414px) rotate(-45deg)">Outer Scutum-Centaurus Arm</text>
-  <text style="font: 30px sans-serif; fill: white; text-anchor:middle; dominant-baseline: middle; transform: translate(546px, 1020px) rotate(-80deg)">Perseus Arm</text>
-  <text style="font: 30px sans-serif; fill: white; text-anchor:middle; dominant-baseline: middle; transform: translate(1023px, 900px)"><tspan x="0" dy="-0.5em">Ryker's</tspan><tspan x="0" dy="1em">Hope</tspan></text>
-  <text style="font: 30px sans-serif; fill: white; text-anchor:middle; dominant-baseline: middle; transform: translate(1646px, 839px) rotate(75deg)"><tspan x="0" dy="-1.0em">Sagittarius-</tspan><tspan x="0" dy="1em">Carina</tspan><tspan x="0" dy="1em">Arm</tspan></text>
-  <text style="font: 30px sans-serif; fill: white; text-anchor:middle; dominant-baseline: middle; transform: translate(1156px, 1678px) rotate(-10deg)">Sanguineous Rim</text>
-  <text style="font: 30px sans-serif; fill: white; text-anchor:middle; dominant-baseline: middle; transform: translate(757px, 1375px) rotate(30deg)">Temple</text>
-  <text style="font: 30px sans-serif; fill: white; text-anchor:middle; dominant-baseline: middle; transform: translate(1874px, 1094px) rotate(-80deg)">Tenebrae</text>
-  <text style="font: 30px sans-serif; fill: white; text-anchor:middle; dominant-baseline: middle; transform: translate(992px, 204px)">The Abyss</text>
-  <text style="font: 30px sans-serif; fill: white; text-anchor:middle; dominant-baseline: middle; transform: translate(627px, 708px) rotate(-50deg)">The Conduit</text>
-  <text style="font: 30px sans-serif; fill: white; text-anchor:middle; dominant-baseline: middle; transform: translate(712px, 1787px) rotate(20deg)">The Formidine Rift</text>
-  <text style="font: 30px sans-serif; fill: white; text-anchor:middle; dominant-baseline: middle; transform: translate(1304px, 660px) rotate(40deg)">The Veils</text>
-  <text style="font: 30px sans-serif; fill: white; text-anchor:middle; dominant-baseline: middle; transform: translate(189px, 778px) rotate(-75deg)">The Void</text>
-  <text style="font: 30px sans-serif; fill: white; text-anchor:middle; dominant-baseline: middle; transform: translate(1417px, 906px) rotate(75deg)">Trojan Belt</text>
-  <text style="font: 30px sans-serif; fill: white; text-anchor:middle; dominant-baseline: middle; transform: translate(591px, 1385px) rotate(50deg)">Vulcan Gate</text>
-  <text style="font: 30px sans-serif; fill: white; text-anchor:middle; dominant-baseline: middle; transform: translate(1728px, 1607px) rotate(-50deg)">Xibalba</text>
+  <text class="regionText" style="transform: translate(1430px, 355px) rotate(30deg)">Acheron</text>
+  <text class="regionText" style="transform: translate(1455px, 1580px) rotate(-35deg)">Achilles's Altar</text>
+  <text class="regionText" style="transform: translate(169px, 1152px) rotate(80deg)">Aquila's Halo</text>
+  <text class="regionText" style="transform: translate(1254px, 903px) rotate(65deg)">Arcadian Stream</text>
+  <text class="regionText" style="transform: translate(1609px, 1104px) rotate(-80deg)">Dryman's Point</text>
+  <text class="regionText" style="transform: translate(800px, 1590px) rotate(20deg)">Elysian Shore</text>
+  <text class="regionText" style="transform: translate(1097px, 1048px) rotate(-60deg)">Empyrean Straits</text>
+  <text class="regionText" style="transform: translate(390px, 1523px) rotate(50deg)">Errant Marches</text>
+  <text class="regionText" style="transform: translate(1034px, 475px)">Formorian Frontier</text>
+  <text class="regionText" style="transform: translate(1015px, 1010px) rotate(-60deg)"><tspan x="0" dy="-0.5em">Galactic</tspan><tspan x="0" dy="1em">Centre</tspan></text>
+  <text class="regionText" style="transform: translate(1367px, 1361px) rotate(-45deg)">Hawking's Gap</text>
+  <text class="regionText" style="transform: translate(702px, 434px) rotate(-30deg)">Hieronymus Delta</text>
+  <text class="regionText" style="transform: translate(957px, 1480px) rotate(5deg)">Inner Orion Spur</text>
+  <text class="regionText" style="transform: translate(765px, 995px) rotate(-60deg)"><tspan x="0" dy="-1.5em">Inner</tspan><tspan x="0" dy="1em">Orion-Perseus</tspan><tspan x="0" dy="1em">Conflux</tspan></text>
+  <text class="regionText" style="transform: translate(852px, 1280px) rotate(40deg)"><tspan x="-2em" dy="-1.5em">Inner</tspan><tspan x="0" dy="1em">Scutum-Centaurus</tspan><tspan x="2em" dy="1em">Arm</tspan></text>
+  <text class="regionText" style="transform: translate(912px, 813px) rotate(-30deg)">Izanami</text>
+  <text class="regionText" style="transform: translate(1227px, 1866px) rotate(-15deg)">Kepler's Crest</text>
+  <text class="regionText" style="transform: translate(1656px, 1396px) rotate(-60deg)">Lyra's Song</text>
+  <text class="regionText" style="transform: translate(1646px, 565px) rotate(55deg)">Mare Somnia</text>
+  <text class="regionText" style="transform: translate(908px, 663px) rotate(-15deg)">Newton's Vault</text>
+  <text class="regionText" style="transform: translate(1020px, 1231px)">Norma Arm</text>
+  <text class="regionText" style="transform: translate(1296px, 1217px) rotate(-45deg)">Norma Expanse</text>
+  <text class="regionText" style="transform: translate(883px, 1055px) rotate(-80deg)">Odin's Hold</text>
+  <text class="regionText" style="transform: translate(669px, 1157px) rotate(70deg)">Orion-Cygnus Arm</text>
+  <text class="regionText" style="transform: translate(404px, 963px) rotate(-80deg)">Outer Arm</text>
+  <text class="regionText" style="transform: translate(1265px, 1530px) rotate(-25deg)">Outer Orion Spur</text>
+  <text class="regionText" style="transform: translate(707px, 869px) rotate(-60deg)"><tspan x="-2em" dy="-1.5em">Outer</tspan><tspan x="0" dy="1em">Orion-Perseus</tspan><tspan x="2em" dy="1em">Conflux</tspan></text>
+  <text class="regionText" style="transform: translate(389px, 414px) rotate(-45deg)">Outer Scutum-Centaurus Arm</text>
+  <text class="regionText" style="transform: translate(546px, 1020px) rotate(-80deg)">Perseus Arm</text>
+  <text class="regionText" style="transform: translate(1023px, 900px)"><tspan x="0" dy="-0.5em">Ryker's</tspan><tspan x="0" dy="1em">Hope</tspan></text>
+  <text class="regionText" style="transform: translate(1646px, 839px) rotate(75deg)"><tspan x="0" dy="-1.0em">Sagittarius-</tspan><tspan x="0" dy="1em">Carina</tspan><tspan x="0" dy="1em">Arm</tspan></text>
+  <text class="regionText" style="transform: translate(1156px, 1678px) rotate(-10deg)">Sanguineous Rim</text>
+  <text class="regionText" style="transform: translate(757px, 1375px) rotate(30deg)">Temple</text>
+  <text class="regionText" style="transform: translate(1874px, 1094px) rotate(-80deg)">Tenebrae</text>
+  <text class="regionText" style="transform: translate(992px, 204px)">The Abyss</text>
+  <text class="regionText" style="transform: translate(627px, 708px) rotate(-50deg)">The Conduit</text>
+  <text class="regionText" style="transform: translate(712px, 1787px) rotate(20deg)">The Formidine Rift</text>
+  <text class="regionText" style="transform: translate(1304px, 660px) rotate(40deg)">The Veils</text>
+  <text class="regionText" style="transform: translate(189px, 778px) rotate(-75deg)">The Void</text>
+  <text class="regionText" style="transform: translate(1417px, 906px) rotate(75deg)">Trojan Belt</text>
+  <text class="regionText" style="transform: translate(591px, 1385px) rotate(50deg)">Vulcan Gate</text>
+  <text class="regionText" style="transform: translate(1728px, 1607px) rotate(-50deg)">Xibalba</text>
 </svg>
